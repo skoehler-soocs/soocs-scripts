@@ -4,7 +4,7 @@
 --
 -- Purpose:     Display the areas / features in Oracle kernel that a hint affects
 --              (displayed as a feature/module hierarchy)
---              Modified version of Tanel Poder's hint.h script which includes 
+--              Modified version of Tanel Poder's hint.h script which lists 
 --              the database version for each hint
 -- Source:      https://github.com/tanelpoder/tpt-oracle/blob/master/hinth.sql
 --------------------------------------------------------------------------------
