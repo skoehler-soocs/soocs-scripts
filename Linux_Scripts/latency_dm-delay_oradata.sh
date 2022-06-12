@@ -3,6 +3,7 @@
 # Script-Version: 0.1
 # Author: Stefan Koehler ( http://www.soocs.de )
 # Description: Sample shell script to setup and emulate I/O latency issue for Oracle data with help of device mappers delay target
+# Use at your own risk!
 
 PARM=$1
 
@@ -20,7 +21,6 @@ CR=${CR%.}
 # Parameter I/O latency for Oracle data
 NOLATENCY=0
 LATENCY=20
-#LATENCY=30
 
 if [[ ${PARM} = 'setup' ]] ; then
 

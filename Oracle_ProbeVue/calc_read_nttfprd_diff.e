@@ -1,5 +1,5 @@
 #!/bin/probevue
-int read(int,  char *, int);
+int read(int, char *, int);
 probev_timestamp_t net_time_arrival;
 probev_timestamp_t entry_time_nttfprd;
 probev_timestamp_t exit_time_syscall_read;
