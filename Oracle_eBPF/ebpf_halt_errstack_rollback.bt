@@ -1,0 +1,49 @@
+#!/usr/bin/env -S bpftrace --no-warnings --unsafe
+
+/*
+    Script-Version: 0.1
+    Author: Stefan Koehler ( http://www.soocs.de )
+    Description: eBPF script to halt a process for an Oracle error stack trace if a specific SQL hash is causing rollbacks in the database.
+                 Use at your own risk!
+    Usage: BPFTRACE_CACHE_USER_SYMBOLS=1 ./ebpf_halt_errstack_rollback.bt
+*/
+
+/* Tested on Oracle 19.28 (x86_64) and Linux kernel 5.4.17-2136.302.6.1.el8uek.x86_64 */
+#define KSUSESQH_OFF   0x984
+#define SADDR_TLS_OFF  0xff78
+
+BEGIN
+{
+  @count = 0;
+}
+
+uprobe:/u01/app/oracle/product/19.28.0.0.250715-213/bin/oracle:roldrv+0x2
+{
+    $fsbase     = uptr(curtask->thread.fsbase);
+    $saddr_p    = uptr($fsbase - SADDR_TLS_OFF);
+    $saddr      = *(uint64 *) uptr($saddr_p);
+    $sql_hash   = *(uint32 *) uptr($saddr + KSUSESQH_OFF);
+
+    if ($sql_hash == 1920170872) 
+    { 
+      @count += 1;
+      if (@count > 3)
+      {
+        printf("Reached 3 rollback events for SQL with hash %d, exiting.\n",$sql_hash);
+        clear(@count);
+        exit();
+      }
+     
+      signal(19);
+      printf("OS process PID %d has been halted as SQL with hash %d has issued a rollback\n",pid,$sql_hash);
+      printf("Please run the following commands in a separate SQL*Plus session to dump an error stack:\n");
+      printf("SQL> ORADEBUG SETOSPID %d\n",pid);
+      printf("SQL> ORADEBUG DUMP ERRORSTACK 3    <<<< ORADEBUG will hang until process is resumed - works as designed\n"); 
+      printf("----------------------------\n");
+      printf("Resume the OS process PID with kill -CONT %d in a separate shell\n\n",pid);
+    }
+}
+
+END
+{
+}
