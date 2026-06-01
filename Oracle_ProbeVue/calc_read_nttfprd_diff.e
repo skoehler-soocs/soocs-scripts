@@ -1,4 +1,11 @@
 #!/bin/probevue
+
+/*
+The following commands are required to run calc_read_nttfprd_diff.e
+       probevctrl -c max_total_mem_size=256 -t          (Error: "Out of memory while allocating Probevue Stack. Max pinned memory for probevue framework is not enough to accommodate Probevue Stack size")
+       probevctrl -c num_pagefaults=2 -t                (Otherwise, net_info_t will be empty)
+*/
+
 int read(int, char *, int);
 probev_timestamp_t net_time_arrival;
 probev_timestamp_t entry_time_nttfprd;
