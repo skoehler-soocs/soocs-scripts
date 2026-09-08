@@ -7,9 +7,9 @@
 		         ksdxdcmds_ = 1: all (this effectively disables oradebug)
                  ksdxdcmds_ = 2: restricted (disables execution of restricted commands)
 
-		 Attaches a uprobe at kewa_sampler+2, which fires every second (in the MMNL process). On every hit:
-   	           * Reads the 4-byte value at the fixed address of ksdxdcmds_ and saves the value from the first sample.
-   	           * Overwrites it with 0 via bpf_probe_write_user().
+		         Attaches a uprobe at kewa_sampler+2, which fires every second (in the MMNL process). On every hit:
+   	               * Reads the 4-byte value at the fixed address of ksdxdcmds_ and saves the value from the first sample.
+   	               * Overwrites it with 0 via bpf_probe_write_user().
                    * Resets it to the value from the first sample on exit.
 
                  Use at your own risk, as it writes directly to the memory of a running Oracle process!
