@@ -15,6 +15,7 @@ Github repository for various scripts that I developed during my Oracle database
 - Oracle_DTrace/[dtrace_stack_Wnnn.sh](Oracle_DTrace/dtrace_stack_Wnnn.sh): Capture C stack traces for Wnnn processes
 - Oracle_ORADEBUG/[lgwr_redo_writing_latch.sh](Oracle_ORADEBUG/lgwr_redo_writing_latch.sh): Oradebug script to aquire "latch: redo writing" for longer periods
 - Oracle_ProbeVue/[calc_read_nttfprd_diff.e](Oracle_ProbeVue/calc_read_nttfprd_diff.e): Sample ProbeVue script to measure network packet handling times
+- Oracle_ProbeVue/[hf_probevue_stack_sampler.ksh](Oracle_ProbeVue/hf_probevue_stack_sampler.ksh): High-frequency (C-stack) profiler for/on AIX
 - Oracle_SQL/[hinth_version.sql](Oracle_SQL/hinth_version.sql): Display the areas / features in Oracle kernel (including version) that a hint affects
 
 ## Business Contact
