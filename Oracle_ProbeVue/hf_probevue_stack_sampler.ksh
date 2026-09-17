@@ -204,7 +204,7 @@ perl -X <<'EOF'
   my @PERL_A_GENSYMS_MAPPING_SORTED = sort { $a->[2] cmp $b->[2] } map { [ $_->[0], $_->[1], perl_uf_norm_hex($_->[0]) ] } @PERL_A_GENSYMS_MAPPING_RAW;
   my $PERL_V_GENSYMS_COUNT = scalar @PERL_A_GENSYMS_MAPPING_SORTED;
 
-  # Single merge pass over both sorted lists (O(n+m)) building one address -> symbol hash.For each stack address this finds the mapping entry with the largest address that is still <= the stack address
+  # Single merge pass over both sorted lists (O(n+m)) building one address -> symbol hash. For each stack address this finds the mapping entry with the largest address that is still <= the stack address
   # Addresses outside the mapping's [min,max] range are "Unknown"
   my %PERL_H_SYMBOL_OF;
   if ($PERL_V_GENSYMS_COUNT == 0)
