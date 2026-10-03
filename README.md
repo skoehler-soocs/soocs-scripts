@@ -1,4 +1,4 @@
-![Soocs Logo](http://www.soocs.de/wp-content/uploads/Soocs_Header.gif)
+![Soocs Logo](https://www.soocs.de/wp-content/uploads/Soocs_Logo_Neu_Transparent.png)
 
 ## General Information
 Github repository for various scripts that I developed during my Oracle database and OS troubleshooting work
